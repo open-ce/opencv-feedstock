@@ -108,6 +108,15 @@ outputs:
       number: 3
       string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
     requirements:
+      build:
+        # Use pins to control cos6/cos7 match
+        - libgcc-ng  {{ libgcc }}
+        - libstdcxx-ng  {{ libstdcxx }}
+      host:
+        # Use pins to control cos6/cos7 match
+        - libgcc-ng  {{ libgcc }}
+        - libstdcxx-ng  {{ libstdcxx }}
+
       run:
         - {{ pin_subpackage('libopencv', exact=True) }}
         - {{ pin_subpackage('py-opencv', exact=True) }}
@@ -125,13 +134,26 @@ outputs:
     requirements:
       # There is no build script, but I just want it to think
       # that it needs python and numpy at build time
+      build:
+        # Use pins to control cos6/cos7 match
+        - libgcc-ng  {{ libgcc }}
+        - libstdcxx-ng  {{ libstdcxx }}
       host:
         - python {{python}}
         - numpy {{numpy}}
+        # Use pins to control cos6/cos7 match
+        - libgcc-ng  {{ libgcc }}
+        - libstdcxx-ng  {{ libstdcxx }}
       run:
         - python {{python}}
         - {{ pin_compatible('numpy') }}
         - {{ pin_subpackage('libopencv', exact=True) }}
+
+test:
+  requires:
+    # Use pins to control cos6/cos7 match
+    - libgcc-ng  {{ libgcc }}
+    - libstdcxx-ng  {{ libstdcxx }}
 
 about:
   home: http://opencv.org/
