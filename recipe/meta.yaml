@@ -38,7 +38,7 @@ source:
     folder: opencv_contrib
 
 build:
-  number: 3
+  number: 5
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   run_exports:
     # https://abi-laboratory.pro/index.php?view=timeline&l=opencv
@@ -111,8 +111,8 @@ outputs:
   - name: libopencv
   - name: opencv
     build:
-      number: 3
-      string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
+      number: 4
+      string: py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
     requirements:
       build:
         # Use pins to control cos6/cos7 match
