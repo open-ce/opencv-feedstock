@@ -134,8 +134,6 @@ outputs:
         # Actually, I have found pretty good compatibility in the python
         # package
         - {{ pin_subpackage('py-opencv') }}
-      ignore_run_exports:
-        - libgfortran-ng
 
     requirements:
       # There is no build script, but I just want it to think
