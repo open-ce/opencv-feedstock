@@ -140,7 +140,7 @@ outputs:
     requirements:
       # There is no build script, but I just want it to think
       # that it needs python and numpy at build time
-      build:ZZ
+      build:
         # Use pins to control cos6/cos7 match
         - libgcc-ng  {{ libgcc }}
         - libstdcxx-ng  {{ libstdcxx }}
