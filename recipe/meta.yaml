@@ -19,7 +19,7 @@
 #
 # By putting all the generated files in 1 package, this makes the build process
 # much easier, at the expense of a few MBs in the 'lib' package.
-{% set version = "4.5.3" %}
+{% set version = "4.5.5" %}
 {% set PY_VER_MAJOR = PY_VER[0] %}
 {% set PY_VER_MINOR = PY_VER[2] %}
 
@@ -34,7 +34,7 @@ source:
     git_tag: {{ version }}
   - url: https://github.com/opencv/opencv_contrib/archive/{{ version }}.tar.gz
     fn: opencv_contrib-{{ version }}.tar.gz
-    sha256: 73da052fd10e73aaba2560eaff10cc5177e2dcc58b27f8aedf7c649e24c233bc
+    sha256: a97c2eaecf7a23c6dbd119a609c6d7fae903e5f9ff5f1fe678933e01c67a6c11
     folder: opencv_contrib
 
 build:
@@ -132,8 +132,8 @@ outputs:
 
 about:
   home: http://opencv.org/
-  license: BSD-3-Clause
-  license_family: BSD
+  license: Apache-2.0
+  license_family: Apache
   license_file: LICENSE
   summary: Computer vision and machine learning software library.
   description: Computer vision and machine learning software library.
