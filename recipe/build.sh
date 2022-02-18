@@ -1,6 +1,6 @@
 #!/bin/bash
 # *****************************************************************
-# (C) Copyright IBM Corp. 2019, 2021. All Rights Reserved.
+# (C) Copyright IBM Corp. 2019, 2022. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -136,6 +136,7 @@ cmake -LAH -G "Ninja"                                                     \
     -DWITH_VA_INTEL=0                                                     \
     -DWITH_GSTREAMER=0                                                    \
     -DWITH_MATLAB=0                                                       \
+    -DWITH_TESSERACT=0                                                    \
     -DWITH_VTK=0                                                          \
     -DWITH_GTK=0                                                          \
     -DWITH_QT=0                                                         \
