@@ -38,12 +38,14 @@ source:
     folder: opencv_contrib
 
 build:
-  number: 1
+  number: 2
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   run_exports:
     # https://abi-laboratory.pro/index.php?view=timeline&l=opencv
     # Things seem to change every patch versions, mostly the dnn module
     - {{ pin_subpackage('libopencv', max_pin='x.x.x') }}
+  script_env:                      #[ppc_arch == "p10"]
+    - GCC_10_HOME                  #[ppc_arch == "p10"]
 
 requirements:
   build:
@@ -51,8 +53,8 @@ requirements:
     - pkg-config {{pkg_config}}
     - cmake {{cmake}}
     - ninja {{ninja}}
-    - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('c') }}          #[ppc_arch != "p10"]
+    - {{ compiler('cxx') }}        #[ppc_arch != "p10"]
     - {{ cdt('mesa-libgl-devel') }}
     - {{ cdt('mesa-dri-drivers') }}
     - {{ cdt('libselinux') }}
@@ -129,6 +131,9 @@ outputs:
         - python {{python}}
         - {{ pin_compatible('numpy') }}
         - {{ pin_subpackage('libopencv', exact=True) }}
+    test:
+      imports:
+        - cv2 
 
 about:
   home: http://opencv.org/
