@@ -144,6 +144,7 @@ cmake -LAH -G "Ninja"                                                     \
     -DINSTALL_C_EXAMPLES=0                                                \
     -DOPENCV_EXTRA_MODULES_PATH="../opencv_contrib/modules"               \
     -DCMAKE_SKIP_RPATH:bool=ON                                            \
+    -DBUILD_opencv_sfm:bool=OFF                                           \
     -DPYTHON_PACKAGES_PATH=${SP_DIR}                                      \
     -DPYTHON_EXECUTABLE=${PYTHON}                                         \
     -DPYTHON_INCLUDE_DIR=${INC_PYTHON}                                    \

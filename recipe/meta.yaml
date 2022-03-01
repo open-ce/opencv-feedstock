@@ -131,6 +131,9 @@ outputs:
         - python {{python}}
         - {{ pin_compatible('numpy') }}
         - {{ pin_subpackage('libopencv', exact=True) }}
+    test:
+      imports:
+        - cv2 
 
 about:
   home: http://opencv.org/
