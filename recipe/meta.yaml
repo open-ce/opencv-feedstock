@@ -76,8 +76,6 @@ requirements:
     - harfbuzz {{harfbuzz}}
     - libpng {{libpng}}
     - ffmpeg {{ffmpeg}}
-    - openblas-devel {{openblas}}
-    - libopenblas {{openblas}}
     - freetype {{freetype}}
     - protobuf {{ protobuf }}
     - libprotobuf {{ protobuf }}
@@ -107,6 +105,9 @@ outputs:
     build:
       string: py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
     requirements:
+      host:
+        - openblas-devel {{openblas}}
+        - libopenblas {{openblas}}
       run:
         - {{ pin_subpackage('libopencv', exact=True) }}
         - {{ pin_subpackage('py-opencv', exact=True) }}
