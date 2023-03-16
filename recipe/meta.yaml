@@ -19,7 +19,7 @@
 #
 # By putting all the generated files in 1 package, this makes the build process
 # much easier, at the expense of a few MBs in the 'lib' package.
-{% set version = "4.6.0" %}
+{% set version = "4.7.0" %}
 {% set PY_VER_MAJOR = PY_VER[0] %}
 {% set PY_VER_MINOR = PY_VER[2] %}
 
@@ -34,7 +34,7 @@ source:
     git_tag: {{ version }}
   - url: https://github.com/opencv/opencv_contrib/archive/{{ version }}.tar.gz
     fn: opencv_contrib-{{ version }}.tar.gz
-    sha256: 1777d5fd2b59029cf537e5fd6f8aa68d707075822f90bde683fcde086f85f7a7
+    sha256: 42df840cf9055e59d0e22c249cfb19f04743e1bdad113d31b1573d3934d62584
     folder: opencv_contrib
 
 build:
