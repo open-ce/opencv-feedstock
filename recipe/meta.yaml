@@ -76,7 +76,7 @@ requirements:
     - ffmpeg {{ffmpeg}}
     - freetype {{freetype}}
     - protobuf {{ protobuf }}
-    - libprotobuf {{ protobuf }}
+    - libprotobuf {{ libprotobuf }}
 
   run:
     # Don't depend on python in the run section
