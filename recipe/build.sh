@@ -51,7 +51,6 @@ then
         export STRIP=${GCC_11_HOME}/bin/strip
         export READELF=${GCC_11_HOME}/bin/readelf
         export HOST=powerpc64le-conda_cos7-linux-gnu
-        export BAZEL_LINKLIBS=-l%:libstdc++.a
 
         # Removing these libs so that opencv libraries link against libstdc++.so present on
         # the system provided by gcc-toolset-11
