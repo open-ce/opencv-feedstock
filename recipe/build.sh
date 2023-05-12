@@ -30,6 +30,35 @@ export CXXFLAGS="${CXXFLAGS//-std=c++17/-std=c++11}"
 
 export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,${PREFIX}/lib"
 
+if [[ $ppc_arch == "p10" ]]
+then
+    if [[ -z "${GCC_11_HOME}" ]];
+    then
+        echo "Please set GCC_11_HOME to the install path of gcc-toolset-11"
+        exit 1
+    else
+        export PATH=$GCC_11_HOME/bin:$PATH
+        export CC=$GCC_11_HOME/bin/gcc
+        export CXX=$GCC_11_HOME/bin/g++
+        export GCC=$CC
+        export GXX=$CXX
+        export AR=${GCC_11_HOME}/bin/ar
+        export LD=${GCC_11_HOME}/bin/ld
+        export NM=${GCC_11_HOME}/bin/nm
+        export OBJCOPY=${GCC_11_HOME}/bin/objcopy
+        export OBJDUMP=${GCC_11_HOME}/bin/objdump
+        export RANLIB=${GCC_11_HOME}/bin/ranlib
+        export STRIP=${GCC_11_HOME}/bin/strip
+        export READELF=${GCC_11_HOME}/bin/readelf
+        export HOST=powerpc64le-conda_cos7-linux-gnu
+        export BAZEL_LINKLIBS=-l%:libstdc++.a
+
+        # Removing these libs so that opencv libraries link against libstdc++.so present on
+        # the system provided by gcc-toolset-11
+        rm ${PREFIX}/lib/libstdc++.so*
+        rm ${BUILD_PREFIX}/lib/libstdc++.so*
+    fi
+fi
 CMAKE_TOOLCHAIN_CMD_FLAGS=""
 CMAKE_TOOLCHAIN_CMD_FLAGS="${CMAKE_TOOLCHAIN_CMD_FLAGS} -DCMAKE_AR=${AR}"
 CMAKE_TOOLCHAIN_CMD_FLAGS="${CMAKE_TOOLCHAIN_CMD_FLAGS} -DCMAKE_LINKER=${LD}"
