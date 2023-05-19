@@ -121,7 +121,7 @@ cmake -LAH -G "Ninja"                                                     \
     -DWITH_FFMPEG=1                                                       \
     -DHAVE_FFMPEG=0                                                       \
     -DWITH_JASPER=0                                                      \
-    -DWITH_ITT=${WITH_ITT}                                                   \
+    -DWITH_ITT=${WITH_ITT}                                                \
     -DWITH_VA=0                                                           \
     -DWITH_VA_INTEL=0                                                     \
     -DWITH_GSTREAMER=0                                                    \
