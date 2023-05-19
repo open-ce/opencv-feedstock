@@ -38,7 +38,7 @@ source:
     folder: opencv_contrib
 
 build:
-  number: 2
+  number: 4
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   run_exports:
     # https://abi-laboratory.pro/index.php?view=timeline&l=opencv
@@ -48,12 +48,12 @@ build:
 requirements:
   build:
     # Required to find ffpmeg
-    - pkg-config {{pkg_config}}
+    - pkg-config {{pkgconfig}}
     - cmake {{cmake}}
     - ninja {{ninja}}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - {{ cdt('mesa-libgl-devel') }}
+    - {{ cdt('mesa-libgl-devel') }}    #[not s390x]
     - {{ cdt('mesa-dri-drivers') }}
     - {{ cdt('libselinux') }}
     - {{ cdt('libxdamage') }}
@@ -65,7 +65,7 @@ requirements:
     - numpy {{numpy}}
     - hdf5 {{hdf5}}
     - eigen {{eigen}}
-    - jasper {{jasper}}
+    - jasper {{jasper}}                #[not s390x]
     - zlib {{zlib}}
     - jpeg {{jpeg}}
     - openjpeg 
@@ -82,7 +82,7 @@ requirements:
     # Don't depend on python in the run section
     # py-opencv will depend on python
     - hdf5                             # versioning handled by run_exports
-    - jasper                           # versioning handled by run_exports
+    - jasper                           #[not s390x]
     - zlib                             # versioning handled by run_exports
     - jpeg                             # versioning handled by run_exports
     - openjpeg

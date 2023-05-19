@@ -17,6 +17,7 @@
 
 set +x
 SHORT_OS_STR=$(uname -s)
+ARCH=`uname -p`
 
 QT="5"
 V4L="1"
@@ -73,6 +74,11 @@ PYTHON_UNSET_INSTALL="-DOPENCV_PYTHON${PY_UNSET_MAJOR}_INSTALL_PATH=${SP_DIR}"
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$PREFIX/lib/pkgconfig
 export OpenBLAS_HOME=${PREFIX}
 
+WITH_ITT=1
+if [[ "${ARCH}" == 's390x' ]]; then
+  WITH_ITT=0
+fi
+
 cmake -LAH -G "Ninja"                                                     \
     -DCMAKE_BUILD_TYPE="Release"                                          \
     -DCMAKE_PREFIX_PATH=${PREFIX}                                         \
@@ -115,6 +121,7 @@ cmake -LAH -G "Ninja"                                                     \
     -DWITH_FFMPEG=1                                                       \
     -DHAVE_FFMPEG=0                                                       \
     -DWITH_JASPER=0                                                      \
+    -DWITH_ITT=${WITH_ITT}                                                \
     -DWITH_VA=0                                                           \
     -DWITH_VA_INTEL=0                                                     \
     -DWITH_GSTREAMER=0                                                    \
