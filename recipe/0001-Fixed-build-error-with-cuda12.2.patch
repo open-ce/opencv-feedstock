@@ -1,0 +1,39 @@
+From d68f02eb65e910ace4cc9a06d4dbdfc5c73283b6 Mon Sep 17 00:00:00 2001
+From: Nishidha Panpaliya <npanpa23@in.ibm.com>
+Date: Thu, 27 Jul 2023 06:40:34 +0000
+Subject: [PATCH] Fixed build error with cuda12.2
+
+---
+ modules/dnn/src/cuda4dnn/primitives/normalize_bbox.hpp | 2 +-
+ modules/dnn/src/cuda4dnn/primitives/region.hpp         | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/modules/dnn/src/cuda4dnn/primitives/normalize_bbox.hpp b/modules/dnn/src/cuda4dnn/primitives/normalize_bbox.hpp
+index f067dddaa7..f2e3fb556e 100644
+--- a/modules/dnn/src/cuda4dnn/primitives/normalize_bbox.hpp
++++ b/modules/dnn/src/cuda4dnn/primitives/normalize_bbox.hpp
+@@ -111,7 +111,7 @@ namespace cv { namespace dnn { namespace cuda4dnn {
+              * or there might be several weights
+              * or we don't have to scale
+              */
+-            if (weight != 1.0)
++            if (weight != static_cast<T>(1.0))
+             {
+                 kernels::scale1_with_bias1<T>(stream, output, input, weight, 1.0);
+             }
+diff --git a/modules/dnn/src/cuda4dnn/primitives/region.hpp b/modules/dnn/src/cuda4dnn/primitives/region.hpp
+index d22d44214e..326ab92b62 100644
+--- a/modules/dnn/src/cuda4dnn/primitives/region.hpp
++++ b/modules/dnn/src/cuda4dnn/primitives/region.hpp
+@@ -121,7 +121,7 @@ namespace cv { namespace dnn { namespace cuda4dnn {
+                 new_coords
+             );
+ 
+-            if (nms_iou_threshold > 0) {
++            if (nms_iou_threshold > static_cast<T>(0)) {
+                 auto output_mat = output_wrapper->getMutableHostMat();
+                 CV_Assert(output_mat.type() == CV_32F);
+                 for (int i = 0; i < input.get_axis_size(0); i++) {
+-- 
+2.40.1
+
