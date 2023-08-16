@@ -152,7 +152,7 @@ cmake -LAH -G "Ninja"                                                     \
     -DWITH_1394=0                                                         \
     -DWITH_CARBON=0                                                       \
     -DWITH_OPENNI=0                                                       \
-    -DWITH_FFMPEG=1                                                       \
+    -DWITH_FFMPEG=0                                                       \
     -DHAVE_FFMPEG=0                                                       \
     -DWITH_JASPER=0                                                      \
     -DWITH_VA=0                                                           \

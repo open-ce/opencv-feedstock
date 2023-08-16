@@ -80,7 +80,6 @@ requirements:
     - libwebp
     - harfbuzz {{harfbuzz}}
     - libpng {{libpng}}
-    - ffmpeg {{ffmpeg}}
     - freetype {{freetype}}
     - protobuf {{ protobuf }}
     - libprotobuf {{ libprotobuf }}
@@ -99,7 +98,6 @@ requirements:
     - harfbuzz                         # versioning handled by run_exports
     - libtiff                          # versioning handled by run_exports
     - libpng                           # versioning handled by run_exports
-    - ffmpeg                           # versioning handled by run_exports
     # https://github.com/conda-forge/opencv-feedstock/issues/174
     # Seems like the OSX ABI has changed between 2.9 and 2.10???
     # That or a dependency wasn't merged in
