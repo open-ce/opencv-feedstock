@@ -102,9 +102,12 @@ PYTHON_UNSET_INSTALL="-DOPENCV_PYTHON${PY_UNSET_MAJOR}_INSTALL_PATH=${SP_DIR}"
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$PREFIX/lib/pkgconfig
 export OpenBLAS_HOME=${PREFIX}
 
+CMAKE_EXE_LINKER_FLAGS=""
 WITH_ITT=1
 if [[ "${ARCH}" == 's390x' ]]; then
   WITH_ITT=0
+else
+  CMAKE_EXE_LINKER_FLAGS="-DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=gold"
 fi
 
 CMAKE_CUDA_ARGS=""
@@ -113,7 +116,7 @@ if [[ "$build_type" == "cuda" ]]; then
 fi
 
 cmake -LAH -G "Ninja"                                                     \
-    -DCMAKE_EXE_LINKER_FLAGS="-fuse-ld=gold"                              \
+    $CMAKE_EXE_LINKER_FLAGS                                               \
     $CMAKE_CUDA_ARGS                                                      \
     -DCMAKE_BUILD_TYPE="Release"                                          \
     -DCMAKE_PREFIX_PATH=${PREFIX}                                         \
