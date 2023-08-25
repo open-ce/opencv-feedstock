@@ -1,6 +1,6 @@
 #!/bin/bash
 # *****************************************************************
-# (C) Copyright IBM Corp. 2019, 2022. All Rights Reserved.
+# (C) Copyright IBM Corp. 2019, 2023. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -102,12 +102,22 @@ PYTHON_UNSET_INSTALL="-DOPENCV_PYTHON${PY_UNSET_MAJOR}_INSTALL_PATH=${SP_DIR}"
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:$PREFIX/lib/pkgconfig
 export OpenBLAS_HOME=${PREFIX}
 
+CMAKE_EXE_LINKER_FLAGS=""
 WITH_ITT=1
 if [[ "${ARCH}" == 's390x' ]]; then
   WITH_ITT=0
+else
+  CMAKE_EXE_LINKER_FLAGS="-DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=gold"
+fi
+
+CMAKE_CUDA_ARGS=""
+if [[ "$build_type" == "cuda" ]]; then
+   CMAKE_CUDA_ARGS="-DWITH_CUDA=1 -DWITH_CUBLAS=1 -DWITH_NVCUVID=0 -DWITH_NVCUVENC=0 -DCUDNN_LIBRARY=${PREFIX}/lib/libcudnn.so -DCUDA_cupti_LIBRARY=$CUDA_HOME/lib64/libcupti.so -DCUDA_SDK_ROOT_DIR=$CUDA_HOME  -DENABLE_FAST_MATH=1 -DCUDA_FAST_MATH=1 -DCUDA_ARCH_BIN=${cuda_levels//,/;}"
 fi
 
 cmake -LAH -G "Ninja"                                                     \
+    $CMAKE_EXE_LINKER_FLAGS                                               \
+    $CMAKE_CUDA_ARGS                                                      \
     -DCMAKE_BUILD_TYPE="Release"                                          \
     -DCMAKE_PREFIX_PATH=${PREFIX}                                         \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}                                      \
@@ -138,8 +148,6 @@ cmake -LAH -G "Ninja"                                                     \
     -DBUILD_LIBPROTOBUF_FROM_SOURCES=0                                    \
     -DBUILD_PROTOBUF=0                                                    \
     -DWITH_V4L=$V4L                                                       \
-    -DWITH_CUDA=0                                                         \
-    -DWITH_CUBLAS=0                                                       \
     -DWITH_OPENCL=0                                                       \
     -DWITH_OPENCLAMDFFT=0                                                 \
     -DWITH_OPENCLAMDBLAS=0                                                \
@@ -147,7 +155,7 @@ cmake -LAH -G "Ninja"                                                     \
     -DWITH_1394=0                                                         \
     -DWITH_CARBON=0                                                       \
     -DWITH_OPENNI=0                                                       \
-    -DWITH_FFMPEG=1                                                       \
+    -DWITH_FFMPEG=0                                                       \
     -DHAVE_FFMPEG=0                                                       \
     -DWITH_JASPER=0                                                      \
     -DWITH_VA=0                                                           \
