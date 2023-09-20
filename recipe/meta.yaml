@@ -38,7 +38,7 @@ source:
     folder: opencv_contrib
 
 build:
-  number: 5
+  number: 6
   string: h{{ PKG_HASH }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}
   run_exports:
     # https://abi-laboratory.pro/index.php?view=timeline&l=opencv
@@ -72,7 +72,7 @@ requirements:
     - jpeg {{jpeg}}
     - openjpeg 
     - libtiff {{libtiff}}
-    - libwebp
+    - libwebp 1.2.4
     - harfbuzz {{harfbuzz}}
     - libpng {{libpng}}
     - ffmpeg {{ffmpeg}}
