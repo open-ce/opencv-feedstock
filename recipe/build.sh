@@ -112,7 +112,7 @@ fi
 
 CMAKE_CUDA_ARGS=""
 if [[ "$build_type" == "cuda" ]]; then
-   CMAKE_CUDA_ARGS="-DWITH_CUDA=1 -DWITH_CUBLAS=1 -DWITH_NVCUVID=0 -DWITH_NVCUVENC=0 -DCUDNN_LIBRARY=${PREFIX}/lib/libcudnn.so -DCUDA_cupti_LIBRARY=$CUDA_HOME/lib64/libcupti.so -DCUDA_SDK_ROOT_DIR=$CUDA_HOME  -DENABLE_FAST_MATH=1 -DCUDA_FAST_MATH=1 -DCUDA_ARCH_BIN=${cuda_levels//,/;}"
+   CMAKE_CUDA_ARGS="-DWITH_CUDA=0 -DWITH_CUBLAS=0 -DWITH_NVCUVID=0 -DWITH_NVCUVENC=0 -DCUDNN_LIBRARY=${PREFIX}/lib/libcudnn.so -DCUDA_cupti_LIBRARY=$CUDA_HOME/lib64/libcupti.so -DCUDA_SDK_ROOT_DIR=$CUDA_HOME  -DENABLE_FAST_MATH=1 -DCUDA_FAST_MATH=1 -DCUDA_ARCH_BIN=${cuda_levels//,/;}"
 fi
 
 cmake -LAH -G "Ninja"                                                     \

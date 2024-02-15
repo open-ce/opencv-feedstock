@@ -19,7 +19,7 @@
 #
 # By putting all the generated files in 1 package, this makes the build process
 # much easier, at the expense of a few MBs in the 'lib' package.
-{% set version = "4.8.1" %}
+{% set version = "4.9.0" %}
 {% set PY_VER_MAJOR = PY_VER[0] %}
 {% set PY_VER_MINOR = PY_VER[2] %}
 
@@ -32,12 +32,10 @@ package:
 source:
   - git_url: https://github.com/opencv/opencv
     git_tag: {{ version }}
-    patches:
-      - 0001-Fixed-build-error-with-cuda12.2.patch      #[cudatoolkit == '12.2']
 
   - url: https://github.com/opencv/opencv_contrib/archive/{{ version }}.tar.gz
     fn: opencv_contrib-{{ version }}.tar.gz
-    sha256: 0c082a0b29b3118f2a0a1856b403bb098643af7b994a0080f402a12159a99c6e
+    sha256: 8952c45a73b75676c522dd574229f563e43c271ae1d5bbbd26f8e2b6bc1a4dae
     folder: opencv_contrib
     
 build:
