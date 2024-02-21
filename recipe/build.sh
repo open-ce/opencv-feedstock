@@ -119,7 +119,7 @@ cmake -LAH -G "Ninja"                                                     \
     $CMAKE_EXE_LINKER_FLAGS                                               \
     $CMAKE_CUDA_ARGS                                                      \
     -DCMAKE_BUILD_TYPE="Release"                                          \
-    -DCMAKE_PREFIX_PATH=${PREFIX}                                         \
+    -DCMAKE_PREFIX_PATH="${BUILD_PREFIX}/${HOST}/sysroot/usr/;${PREFIX}"   \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}                                      \
     -DCMAKE_INSTALL_LIBDIR="lib"                                          \
     -DOPENCV_DOWNLOAD_TRIES=1\;2\;3\;4\;5                                 \
