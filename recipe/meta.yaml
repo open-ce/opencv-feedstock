@@ -49,7 +49,7 @@ build:
     # Things seem to change every patch versions, mostly the dnn module
     - {{ pin_subpackage('libopencv', max_pin='x.x.x') }}
   script_env:
-    - GCC_11_HOME          #[ppc_arch == 'p10']
+    - GCC_HOME          #[ppc_arch == 'p10']
     - CUDA_HOME            #[build_type == "cuda"]
 
 requirements:
