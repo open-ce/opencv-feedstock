@@ -41,7 +41,7 @@ source:
     folder: opencv_contrib
     
 build:
-  number: 3
+  number: 4
   string: h{{ PKG_HASH }}_{{ build_type }}{{ cudatoolkit | replace(".*", "") }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}     #[build_type == "cuda"]
   string: h{{ PKG_HASH }}_{{ build_type }}_py{{ python | replace(".", "") }}_pb{{ protobuf | replace(".*", "")}}_{{ PKG_BUILDNUM }}     #[build_type == "cpu"]
   run_exports:
@@ -73,7 +73,7 @@ requirements:
     - hdf5 {{hdf5}}
     - eigen {{eigen}}
     - jasper {{jasper}}                  #[not s390x]
-    - zlib {{zlib}}
+    - zlib
     - jpeg {{jpeg}}
     - openjpeg 
     - libtiff {{libtiff}}
@@ -110,7 +110,7 @@ requirements:
 outputs:
   - name: opencv-proc
     build:
-      number: 1
+      number: 2
       string: {{ build_type }}
     test:
       commands:
