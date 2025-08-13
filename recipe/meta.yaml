@@ -110,7 +110,7 @@ requirements:
 outputs:
   - name: opencv-proc
     build:
-      number: 2
+      number: 1
       string: {{ build_type }}
     test:
       commands:
