@@ -29,7 +29,8 @@ export CXXFLAGS="$CXXFLAGS -D__STDC_CONSTANT_MACROS"
 export CPPFLAGS="${CPPFLAGS//-std=c++17/-std=c++11}"
 export CXXFLAGS="${CXXFLAGS//-std=c++17/-std=c++11}"
 
-export LDFLAGS="${LDFLAGS} -Wl,-rpath-link,${PREFIX}/lib"
+# Force linker to use conda libstdc++
+export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib -Wl,-rpath,${PREFIX}/lib"
 
 if [[ $ppc_arch == "p10" ]]
 then
@@ -118,6 +119,8 @@ fi
 cmake -LAH -G "Ninja"                                                     \
     $CMAKE_EXE_LINKER_FLAGS                                               \
     $CMAKE_CUDA_ARGS                                                      \
+    -DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}"                              \
+    -DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS}"                                 \
     -DCMAKE_BUILD_TYPE="Release"                                          \
     -DCMAKE_PREFIX_PATH="${BUILD_PREFIX}/${HOST}/sysroot/usr/;${PREFIX}"   \
     -DCMAKE_INSTALL_PREFIX=${PREFIX}                                      \
